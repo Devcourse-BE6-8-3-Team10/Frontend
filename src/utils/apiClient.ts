@@ -26,7 +26,7 @@ interface Pageable {
 
 // axios 인스턴스 생성
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || "https://www.devteam10.org",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080",
   headers: {
     "Content-Type": "application/json",
   },
@@ -298,10 +298,10 @@ export interface TradeDetailDto {
 // 관리자 관련 API 함수들
 export const adminAPI = {
   // 전체 회원 목록 조회 (관리자 전용)
-  getAllMembers: async (): Promise<{ 
+  getAllMembers: async (): Promise<{
     resultCode: string;
     msg: string;
-    data: { 
+    data: {
       content: Array<{
         id: number;
         email: string;
@@ -316,14 +316,14 @@ export const adminAPI = {
       totalElements: number;
       totalPages: number;
       pageable: Pageable;
-    } 
+    }
   }> => {
     const response = await apiClient.get('/api/admin/members');
     return response.data;
   },
 
   // 회원 상세 정보 조회 (관리자 전용)
-  getMemberDetail: async (memberId: number): Promise<{ 
+  getMemberDetail: async (memberId: number): Promise<{
     resultCode: string;
     msg: string;
     data: {
@@ -336,7 +336,7 @@ export const adminAPI = {
       createdAt: string;
       modifiedAt?: string;
       deletedAt?: string;
-    } 
+    }
   }> => {
     const response = await apiClient.get(`/api/admin/members/${memberId}`);
     return response.data;
@@ -357,10 +357,10 @@ export const adminAPI = {
   },
 
   // 모든 특허 조회 (관리자 전용)
-  getAllPatents: async (): Promise<{ 
+  getAllPatents: async (): Promise<{
     resultCode: string;
     msg: string;
-    data: { 
+    data: {
       content: Array<{
         id: number;
         title: string;
@@ -377,7 +377,7 @@ export const adminAPI = {
       totalElements: number;
       totalPages: number;
       pageable: Pageable;
-    } 
+    }
   }> => {
     const response = await apiClient.get('/api/admin/patents');
     return response.data;
@@ -395,7 +395,7 @@ export const adminAPI = {
   },
 
   // 특허 상세 정보 조회 (관리자 전용)
-  getPatentDetail: async (patentId: number): Promise<{ 
+  getPatentDetail: async (patentId: number): Promise<{
     resultCode: string;
     msg: string;
     data: {
@@ -410,7 +410,7 @@ export const adminAPI = {
       favoriteCnt: number;
       authorId: number;
       authorName?: string;
-    } 
+    }
   }> => {
     const response = await apiClient.get(`/api/admin/patents/${patentId}`);
     return response.data;
