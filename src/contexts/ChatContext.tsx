@@ -87,7 +87,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       console.log(`채팅방 ${roomId} 메시지 로드 시작`);
 
       const token = getAccessTokenCookie();
-      const response = await fetch(`https://www.devteam10.org/api/chat/rooms/${roomId}/messages`, {
+      //const response = await fetch(`https://www.devteam10.org/api/chat/rooms/${roomId}/messages`, {
+      const response = await fetch(`http://localhost:8080/api/chat/rooms/${roomId}/messages`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -165,7 +166,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const response = await fetch('https://www.devteam10.org/api/chat/rooms/my', {
+      const response = await fetch('http://localhost:8080/api/chat/rooms/my', {
         method: 'GET',
         headers,
         credentials: 'include'
@@ -303,7 +304,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
       console.log("요청 헤더:", headers);
 
-      const response = await fetch('https://www.devteam10.org/api/chat/rooms/my', {
+      const response = await fetch('http://localhost:8080/api/chat/rooms/my', {
         method: 'GET',
         headers,
         credentials: 'include' // 쿠키도 함께 전송
