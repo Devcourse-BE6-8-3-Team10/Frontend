@@ -12,6 +12,7 @@ import { ChatMessage, ChatRoom, webSocketService } from "../utils/websocket";
 import { useAuth } from "./AuthContext";
 import { getAccessTokenCookie } from "../utils/cookieUtils";
 import { chatAPI } from "../utils/apiClient";
+import { BASE_URL } from "../config/urlConfig";
 
 // 백엔드에서 받는 메시지 타입 정의
 interface BackendMessage {
@@ -88,7 +89,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
       const token = getAccessTokenCookie();
       //const response = await fetch(`https://www.devteam10.org/api/chat/rooms/${roomId}/messages`, {
-      const response = await fetch(`http://localhost:8080/api/chat/rooms/${roomId}/messages`, {
+      const response = await fetch(`${BASE_URL}/api/chat/rooms/${roomId}/messages`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +167,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const response = await fetch('http://localhost:8080/api/chat/rooms/my', {
+      const response = await fetch(`${BASE_URL}/api/chat/rooms/my`, {
         method: 'GET',
         headers,
         credentials: 'include'
@@ -304,7 +305,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
       console.log("요청 헤더:", headers);
 
-      const response = await fetch('http://localhost:8080/api/chat/rooms/my', {
+      const response = await fetch(`${BASE_URL}/api/chat/rooms/my`, {
         method: 'GET',
         headers,
         credentials: 'include' // 쿠키도 함께 전송

@@ -1,5 +1,6 @@
 import SockJS from "sockjs-client";
 import { Client, StompSubscription } from "@stomp/stompjs";
+import { BASE_URL } from "../config/urlConfig";
 
 export interface ChatMessage {
   id?: string;
@@ -32,7 +33,7 @@ class WebSocketService {
         console.log("WebSocket 연결 시도...");
 
         this.client = new Client({
-          webSocketFactory: () => new SockJS("http://localhost:8080/chat"),
+          webSocketFactory: () => new SockJS(`${BASE_URL}/chat`),
           connectHeaders: {
             "user-email": userEmail
           },

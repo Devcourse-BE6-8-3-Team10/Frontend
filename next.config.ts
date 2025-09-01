@@ -1,13 +1,20 @@
 import type { NextConfig } from "next";
+import { BASE_URL } from "./src/config/urlConfig";
+
+// BASE_URL에서 프로토콜, 호스트명, 포트 추출
+const url = new URL(BASE_URL);
+const protocol = url.protocol.replace(':', '');
+const hostname = url.hostname;
+const port = url.port;
 
 const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8080',
+        protocol: protocol,
+        hostname: hostname,
+        port: port,
         pathname: '/files/**',
       },
       {
@@ -25,14 +32,8 @@ const nextConfig: NextConfig = {
     ],
   },
   env: {
-    // NEXT_PUBLIC_BACKEND_URL: "https://www.devteam10.org",
-    // NEXT_PUBLIC_WEBSOCKET_URL: "wss://www.devteam10.org/chat",
-    NEXT_PUBLIC_BACKEND_URL: "http://localhost:8080",
-    NEXT_PUBLIC_WEBSOCKET_URL: "ws://http://localhost:8080",
-
-    // 백엔드 주소
-    // NEXT_PUBLIC_BACKEND_URL: "http://34.64.160.179:8080",
-    // NEXT_PUBLIC_WEBSOCKET_URL: "ws://34.64.160.179:8080/chat",
+    NEXT_PUBLIC_BACKEND_URL: BASE_URL,
+    NEXT_PUBLIC_WEBSOCKET_URL: BASE_URL.replace(/^http/, 'ws'),
   },
   // WebSocket 연결을 위한 설정
   async headers() {

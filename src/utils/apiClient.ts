@@ -5,6 +5,7 @@ import axios, {
 } from "axios";
 import { ChatMessage, ChatRoom } from "./websocket";
 import { getAccessTokenCookie, clearAccessTokenCookie, clearRefreshTokenCookie } from './cookieUtils';
+import { BASE_URL } from '../config/urlConfig';
 
 // 특허 관련 타입 정의
 interface Patent {
@@ -26,7 +27,7 @@ interface Pageable {
 
 // axios 인스턴스 생성
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080",
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
