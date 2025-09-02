@@ -122,28 +122,6 @@ export default function AdminTradesPage() {
     refetch(); // 거래 목록 새로고침
   };
 
-  // 카테고리를 한글로 변환하는 함수
-const getCategoryLabel = (category: string): string => {
-  switch (category) {
-    case 'PRODUCT':
-      return '물건발명';
-    case 'METHOD':
-      return '방법발명';
-    case 'USE':
-      return '용도발명';
-    case 'DESIGN':
-      return '디자인권';
-    case 'TRADEMARK':
-      return '상표권';
-    case 'COPYRIGHT':
-      return '저작권';
-    case 'ETC':
-      return '기타';
-    default:
-      return category;
-  }
-};
-
   // 필터링된 거래 목록
   const filteredTrades = tradesWithPostInfo.filter(trade => {
     const matchesSearch = trade.id.toString().includes(searchTerm) ||
@@ -286,7 +264,7 @@ const getCategoryLabel = (category: string): string => {
                   {trades.length === 0 ? '등록된 거래가 없습니다.' : '검색 결과가 없습니다.'}
                 </p>
                 <p className="text-sm text-gray-500 mt-2">
-                  '다른 검색어나 필터를 시도해보세요.'
+                  다른 검색어나 필터를 시도해보세요.
                 </p>
               </div>
             ) : (
