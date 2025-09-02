@@ -112,32 +112,7 @@ export default function MemberDetailModal({
     }
   };
 
-  // 회원 탈퇴 처리
-  const handleDeleteMember = async () => {
-    if (!memberId) return;
-    
-    if (!confirm('정말로 이 회원을 탈퇴시키시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
-      return;
-    }
-    
-    setIsLoading(true);
-    setError(null);
-    setSuccessMessage(null);
-    
-    try {
-      await adminAPI.deleteMemberByAdmin(memberId);
-      setSuccessMessage('회원이 성공적으로 탈퇴되었습니다.');
-      onMemberUpdated();
-      setTimeout(() => {
-        onClose();
-      }, 1500);
-    } catch (err: unknown) {
-      const error = err as ApiError;
-      setError(error.response?.data?.message || '회원 탈퇴에 실패했습니다.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // 회원 탈퇴 기능 제거됨
 
   useEffect(() => {
     if (isOpen && memberId) {
@@ -428,18 +403,6 @@ export default function MemberDetailModal({
                          닫기
                        </button>
                      </div>
-                     <button
-                       onClick={handleDeleteMember}
-                       disabled={isLoading || member.status === 'DELETED'}
-                       className={`px-4 py-2 rounded-md ${
-                         member.status === 'DELETED'
-                           ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                           : 'bg-red-600 text-white cursor-pointer hover:bg-red-700'
-                       } disabled:opacity-50`}
-                     >
-                       {isLoading ? '탈퇴 중...' : 
-                        member.status === 'DELETED' ? '이미 탈퇴됨' : '회원탈퇴'}
-                     </button>
                    </div>
                 </div>
               )}

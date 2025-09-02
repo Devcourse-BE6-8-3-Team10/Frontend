@@ -421,6 +421,49 @@ export const adminAPI = {
   deletePatentByAdmin: async (patentId: number): Promise<void> => {
     await apiClient.delete(`/api/admin/patents/${patentId}`);
   },
+
+  // 모든 거래 조회 (관리자 전용)
+  getAllTrades: async (): Promise<{
+    resultCode: string;
+    msg: string;
+    data: {
+      content: Array<{
+        id: number;
+        postId: number;
+        sellerId: number;
+        buyerId: number;
+        price: number;
+        status: string;
+        createdAt: string;
+      }>;
+      totalElements: number;
+      totalPages: number;
+      pageable: Pageable;
+    }
+  }> => {
+    const response = await apiClient.get('/api/admin/trades');
+    return response.data;
+  },
+
+  // 거래 상세 정보 조회 (관리자 전용)
+  getTradeDetail: async (tradeId: number): Promise<{
+    resultCode: string;
+    msg: string;
+    data: {
+      id: number;
+      postId: number;
+      postTitle: string;
+      postCategory: string;
+      price: number;
+      status: string;
+      createdAt: string;
+      sellerEmail: string;
+      buyerEmail: string;
+    }
+  }> => {
+    const response = await apiClient.get(`/api/admin/trades/${tradeId}`);
+    return response.data;
+  },
 };
 
 export default apiClient;
