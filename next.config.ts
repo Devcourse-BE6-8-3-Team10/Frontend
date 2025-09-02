@@ -3,9 +3,9 @@ import { BASE_URL } from "./src/config/urlConfig";
 
 // BASE_URL에서 프로토콜, 호스트명, 포트 추출
 const url = new URL(BASE_URL);
-const protocol = url.protocol.replace(':', '');
+const protocol = url.protocol.replace(':', '') as 'http' | 'https';
 const hostname = url.hostname;
-const port = url.port;
+const port = url.port || '';
 
 const nextConfig: NextConfig = {
   images: {
