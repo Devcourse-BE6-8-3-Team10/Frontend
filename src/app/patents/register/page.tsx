@@ -212,7 +212,7 @@ export default function PatentRegisterPage() {
                     value={formData.title}
                     onChange={handleChange}
                     required
-                    className={`w-full px-3 py-2 border ${validationErrors.title ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.title ? 'animate-shake' : ''}`}
+                    className={`w-full px-3 py-2 border ${validationErrors.title ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.title ? 'animate-shake' : ''} placeholder:text-gray-500 text-gray-800`}
                     placeholder="제목을 입력하세요"
                   />
                 </div>
@@ -226,9 +226,9 @@ export default function PatentRegisterPage() {
                     value={formData.category}
                     onChange={handleChange}
                     required
-                    className={`w-full px-3 py-2 border ${validationErrors.category ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.category ? 'animate-shake' : ''}`}
+                    className={`w-full px-3 py-2 border ${validationErrors.category ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.category ? 'animate-shake' : ''} text-gray-700`}
                   >
-                    <option value="">기술분야를 선택하세요</option>
+                    <option value="" className="text-gray-500">기술분야를 선택하세요</option>
                     <option value="PRODUCT">물건발명</option>
                     <option value="METHOD">방법발명</option>
                     <option value="USE">용도발명</option>
@@ -249,7 +249,7 @@ export default function PatentRegisterPage() {
                     onChange={handleChange}
                     required
                     rows={10}
-                    className={`w-full px-3 py-2 border ${validationErrors.description ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.description ? 'animate-shake' : ''}`}
+                    className={`w-full px-3 py-2 border ${validationErrors.description ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.description ? 'animate-shake' : ''} placeholder:text-gray-500 text-gray-800`}
                     placeholder="내용을 입력하세요"
                   />
                 </div>
@@ -274,7 +274,7 @@ export default function PatentRegisterPage() {
                       setFormData((prev) => ({ ...prev, price: value }));
                     }}
                     required
-                    className={`w-full px-3 py-2 border ${validationErrors.price ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.price ? 'animate-shake' : ''}`}
+                    className={`w-full px-3 py-2 border ${validationErrors.price ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${shakeErrors.price ? 'animate-shake' : ''} placeholder:text-gray-500 text-gray-800`}
                     placeholder="가격을 입력하세요"
                   />
                 </div>
@@ -345,7 +345,7 @@ export default function PatentRegisterPage() {
                       name="files"
                       multiple
                       onChange={handleFileChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                     />
                     <p className="text-xs text-gray-500 mt-1">
                       여러 파일을 선택할 수 있습니다.
