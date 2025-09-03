@@ -58,14 +58,14 @@ export default function RegisterSuccessPage() {
             <div className="space-y-4">
               <button
                 onClick={handleLoginClick}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors font-medium"
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors font-medium cursor-pointer"
               >
                 로그인하기
               </button>
               
               <button
                 onClick={handleHomeClick}
-                className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-lg transition-colors font-medium"
+                className="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg transition-colors font-medium cursor-pointer"
               >
                 홈으로 돌아가기
               </button>

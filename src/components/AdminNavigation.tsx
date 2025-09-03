@@ -17,6 +17,7 @@ export default function AdminNavigation({ user }: AdminNavigationProps) {
   const navItems = [
     { href: '/admin/members', label: '회원 관리', icon: '👥' },
     { href: '/admin/patents', label: '특허 관리', icon: '📋' },
+    { href: '/admin/trades', label: '거래 내역', icon: '💰' },
   ];
 
   return (
