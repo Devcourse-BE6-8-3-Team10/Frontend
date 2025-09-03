@@ -38,6 +38,33 @@ const getStatusLabel = (status: string): string => {
   }
 };
 
+// 게시글 카테고리를 한글 라벨로 변환하는 함수
+const getCategoryLabel = (category: string): string => {
+  // 이미 한글인 경우 그대로 반환
+  const koreanCategories = ["물건발명", "방법발명", "용도발명", "디자인권", "상표권", "저작권"];
+  if (koreanCategories.includes(category)) {
+    return category;
+  }
+  
+  // 영어인 경우 한글로 변환
+  switch (category) {
+    case "PRODUCT":
+      return "물건발명";
+    case "METHOD":
+      return "방법발명";
+    case "USAGE":
+      return "용도발명";
+    case "DESIGN":
+      return "디자인권";
+    case "TRADEMARK":
+      return "상표권";
+    case "COPYRIGHT":
+      return "저작권";
+    default:
+      return category || "기타"; // 빈 값이면 "기타"로 표시
+  }
+};
+
 // 거래 상태에 따른 색상 클래스
 const getStatusColor = (status: string): string => {
   switch (status) {
@@ -77,35 +104,36 @@ export default function AdminTradesPage() {
   useEffect(() => {
     if (trades.length > 0) {
       fetchPostInfoForTrades(trades);
+    } else {
+      setTradesWithPostInfo([]);
     }
   }, [trades]);
 
   // 각 거래에 대해 게시글 정보를 가져오는 함수
   const fetchPostInfoForTrades = async (trades: Trade[]) => {
-    const tradesWithInfo: TradeWithPostInfo[] = [];
-    
-    for (const trade of trades) {
-      try {
-        // 거래 상세 정보를 가져와서 게시글 제목과 카테고리 추출
-        const detailResponse = await adminAPI.getTradeDetail(trade.id);
-        const tradeDetail = detailResponse?.data;
-        
-        tradesWithInfo.push({
-          ...trade,
-          postTitle: tradeDetail?.postTitle || '제목 없음',
-          postCategory: tradeDetail?.postCategory || '카테고리 없음'
-        });
-      } catch (error) {
-        console.error(`거래 ${trade.id} 상세 정보 조회 실패:`, error);
-        tradesWithInfo.push({
-          ...trade,
-          postTitle: '제목 없음',
-          postCategory: '카테고리 없음'
-        });
-      }
-    }
-    
-    setTradesWithPostInfo(tradesWithInfo);
+    const results = await Promise.all(
+      trades.map(async (trade) => {
+        try {
+          const { data } = await adminAPI.getTradeDetail(trade.id);
+          return {
+            ...trade,
+            postTitle: data?.postTitle ?? '제목 없음',
+            // 원본 카테고리를 한글 라벨로 변환하여 UI/검색/배지 색상과 일치
+            postCategory: data?.postCategory
+              ? getCategoryLabel(data.postCategory)
+              : '카테고리 없음',
+          } as TradeWithPostInfo;
+        } catch (error) {
+          console.error(`거래 ${trade.id} 상세 정보 조회 실패:`, error);
+          return {
+            ...trade,
+            postTitle: '제목 없음',
+            postCategory: '카테고리 없음',
+          } as TradeWithPostInfo;
+        }
+      })
+    );
+    setTradesWithPostInfo(results);
   };
 
   const handleTradeClick = (tradeId: number) => {

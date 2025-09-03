@@ -423,7 +423,14 @@ export const adminAPI = {
   },
 
   // 모든 거래 조회 (관리자 전용)
-  getAllTrades: async (): Promise<{
+    getAllTrades: async (params?: {
+    page?: number;
+    size?: number;
+    status?: string;
+    sellerEmail?: string;
+    buyerEmail?: string;
+    postId?: number;
+  }): Promise<{
     resultCode: string;
     msg: string;
     data: {
@@ -439,9 +446,9 @@ export const adminAPI = {
       totalElements: number;
       totalPages: number;
       pageable: Pageable;
-    }
+    };
   }> => {
-    const response = await apiClient.get('/api/admin/trades');
+    const response = await apiClient.get('/api/admin/trades', { params });
     return response.data;
   },
 
