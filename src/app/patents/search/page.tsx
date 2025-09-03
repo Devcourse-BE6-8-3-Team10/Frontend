@@ -154,7 +154,7 @@ export default function PatentSearchPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="특허명, 발명자, 키워드로 검색하세요"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg placeholder:text-black text-gray-800"
               />
               <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                 검색
@@ -168,10 +168,10 @@ export default function PatentSearchPage() {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
                 >
                   {categories.map(category => (
-                    <option key={category} value={category}>{category}</option>
+                    <option key={category} value={category} className="text-gray-700">{category}</option>
                   ))}
                 </select>
               </div>
@@ -181,10 +181,10 @@ export default function PatentSearchPage() {
                 <select
                   value={selectedStatus}
                   onChange={(e) => setSelectedStatus(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
                 >
                   {statuses.map(status => (
-                    <option key={status} value={status}>{status}</option>
+                    <option key={status} value={status} className="text-gray-700">{status}</option>
                   ))}
                 </select>
               </div>
@@ -194,12 +194,12 @@ export default function PatentSearchPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
                 >
-                  <option value="최신순">최신순</option>
-                  <option value="오래된순">오래된순</option>
-                  <option value="가격높은순">가격높은순</option>
-                  <option value="가격낮은순">가격낮은순</option>
+                  <option value="최신순" className="text-gray-700">최신순</option>
+                  <option value="오래된순" className="text-gray-700">오래된순</option>
+                  <option value="가격높은순" className="text-gray-700">가격높은순</option>
+                  <option value="가격낮은순" className="text-gray-700">가격낮은순</option>
                 </select>
               </div>
 
@@ -282,4 +282,4 @@ export default function PatentSearchPage() {
       </div>
     </div>
   );
-} 
+}
